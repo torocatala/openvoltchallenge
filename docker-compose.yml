@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  backend:
+    build: ./backend
+    user: "${UID}:${GID}"
+    ports:
+      - '3000:3000'
+    environment:
+      PORT: 3000
+      OPENVOLT_API_KEY: ${OPENVOLT_API_KEY}
+    volumes:
+      - './backend:/app'
+      - /app/node_modules
+    command: npx nodemon start
