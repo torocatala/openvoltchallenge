@@ -1,76 +1,69 @@
-# Components
-- A Vue.JS frontend
-- A Node backend
+# OpenVolt technical challenge
 
-## Optional
+This is my take at the openvolt technical challenge, the challengue reads like this:
+
+## The challlenge
+A commercial building in the UK (Stark Industries UK HQ) consumes electricity from the National Grid. Write a programme in a language of your choice that calculates 
+
+The monthly energy consumed by the building (kWh)
+The monthly amount of CO2 (kgs) emitted by the electricity generated for the building. Use half hourly readings from data sources to calculate this
+The monthly % of fuel mix (wind/solar/nuclear/coal/etc) used to generate the electricity. Again, use half hourly readings to calculate weighted average
+
+The timeframe is for the month of January 2023
+‍
+Resources
+
+The Openvolt API (docs.openvolt.com). The building has one electricity meter with a meter_id of "6514167223e3d1424bf82742" Use x-api-key "test-Z9EB05N-07FMA5B-PYFEE46-X4ECYAR" for API calls
+Official Carbon Intensity API from the National Grid  (https://carbon-intensity.github.io/api-definitions/#carbon-intensity-api-v2-0-0)
+
+Source: https://www.openvolt.com/careers
+
+# What I did:
+
+This repo is a monorepo that includes a system with two applications and its orchestration.
+The apps are:
+
+- Backend: NodeJS API using expressJS
+- Frontend: An SPA made using Vue.js
+
+Both projects are dockerized and orchestrated using docker-compose.
+
+The project is completely functional and self-contained (excluding npm dependencies).
+
+# Run the project
+
+## Requeriments
+- A machine that can run bash scripts
+- Docker
+- An internet connection for the npm dependencies
+
+## How to run the proejct
+- Execute: `start.sh`
+
+# Nice things
+
+- Actually works
+- Uses similar technologies to the openvolt stack
+- The start.sh script is idempotent
+- Everythings is dockerized making it easy to run anywhere
+- There is a very small attempt at DDD in the backend
+
+# Not so nice things that could have been included
+
+- Frontend has no separation of anything, everything is inside the same component
+- Frontend is fugly
+- Lack of testing
+- Lack of validation
+- Lack of error handling
+- If a better DDD had been created, some models could been shared between the frontend and the backend, which is a nice thing especially having a fullstack using the same langauge in the front and the back and is specially easy when using monorepo as creating the artifacts is quite trivial with this setup.
+
+# Possible next tasks if this was a real project
+There are a ton of things that can be done, but 
 - MongoDB for users and stuff
-- TimescaleDB
-- Redis/Memcached
+- TimescaleDB for usage metrics, probably having two "collections",, one for the carbon data and another for the meters and the calculated usage data.
+- Redis/Memcached to save plain queries results and sessions.
 
-# Tasks
-- Create a dockerized NodeJS backend using express or koa
-- Create a docker compose
-- Create a start script
-- Create an endpoint that receives a meter ID and a date range
-- Make it return something
-- Have a test for it
-- Make the endpoint query the openvolt api
-- Encapsulate the openvolt api in a client creating a test for it with a mocked response
-- Add external data validation
-- Add the intensity data fromt eh carbon api
-- Extract it and encapsualte it
-- Add the fuel type
-
-- Create a frontend with vue.js and docker
-- Add it to docker compose
-- Make the vue be able to retreive data from the backend
-- Show the data in basic format
-- Show it fancy
-- Add field so we can query different meters and timeframes
-
-## Optional tasks
-- Add fake meter so the selector has more than one meter
-
-
-# Frontend
-- Select a meter
-- Select a timeframe
-- Display data
-
-## Optional:
-- Display fancy data
-- Login
-- Display user personal data
-- Query meter data using AI
-
-# Backend
-- Tests
-- Gets meter information from OpenVolt API
-- Gets intensity data from carbon intensity API
-- Gets fuel type data from carbon intensity API
-- Serves the joint data trough an endpoint. The endpoint must receive a meter id(get it from the sesion?) and a date range
-- Some kind of authentication, JWT?
-- Frontend needs to be able to query backend (CORS)
-
-## Optional:
-- Auth for the frontend login
-- Endpoint for the user data
-- Endpoint to query user data using AI
-- Create user
-- Edit user
-- Save data in TimeScaleDB
-- Cache using redis
-- Sesion cache using redis/memcached
-
-
-# Insights
-- The queries consist of user+meterid+timeframe
-- Search for the full joint data in the cache
-- Search for the full joint data in the TimeScaleDB
-- Search only for the environmental data in the TimeScaleDB
-- Fetch the data from the APIs
-
-# Use cases:
-- As I user I want to know the monthly energy consumed by my building
-- As I user I want to know the amount of CO2 emmited by the building energy consumption
-- As I user I want to know the sources used to generate the electricity consumed by the building
+# Conclusions
+I hope all of the work here plus the written in this file where I analize what I did and what is missing can showcase a little my knowledge and ability to create fullstack applications.
+Thank your reading trough this and taking a look at the code.
+I hope you can run the application and see it working, the functionality may be simple but I believe the decisions made on how to implement the functionality are what should actually be valued.
