@@ -13,3 +13,15 @@ services:
       - './backend:/app'
       - /app/node_modules
     command: npx nodemon start
+  frontend:
+    build: ./frontend
+    user: "${UID}:${GID}"
+    ports:
+      - '3001:3001'
+    environment:
+      PORT: 3001
+    volumes:
+      - './frontend:/app'
+      - /app/node_modules
+    command: npx vite --host
+    #command: npx nodemon start

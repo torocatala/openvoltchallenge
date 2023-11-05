@@ -8,4 +8,4 @@ docker compose up -d --force-recreate --build
 
 echo "Containers running, please visit http://localhost:3000/"
 
-docker compose logs -f backend
+echo "Containers running, please visit http://localhost:3001/"
