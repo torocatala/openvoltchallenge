@@ -6,12 +6,11 @@ if [ ! -f .env ]; then
     exit;
 fi
 
-export UID=$(id -u) 2>/dev/null
-export GID=$(id -g) 2>/dev/null
-
 docker compose down --volumes --remove-orphans
-docker compose up -d --force-recreate --build
+docker compose -p 'ivanjh' up -d --force-recreate --build
 
 echo "Containers running, please visit http://localhost:3000/"
 
 echo "Containers running, please visit http://localhost:3001/"
+
+docker compose -p 'ivanjh' logs -f

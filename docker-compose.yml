@@ -3,7 +3,6 @@ version: '3'
 services:
   backend:
     build: ./backend
-    user: "${UID}:${GID}"
     ports:
       - '3000:3000'
     environment:
@@ -15,7 +14,6 @@ services:
     command: npx nodemon start
   frontend:
     build: ./frontend
-    user: "${UID}:${GID}"
     ports:
       - '3001:3001'
     environment:
