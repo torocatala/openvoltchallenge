@@ -38,6 +38,7 @@ The project is completely functional and self-contained (excluding npm dependenc
 - An internet connection for the npm dependencies
 
 ## How to run the proejct
+- Create a .env with the OPENVOLT_API_KEY, you can cope the .env.example and fill the value.
 - Execute: `start.sh`
 
 # Nice things
